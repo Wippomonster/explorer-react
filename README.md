@@ -1,32 +1,57 @@
-# React + TypeScript + Vite
+# Explorer App con React
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Aplicación adaptable para explorar países, hecha con React y TypeScript siguiendo Atomic Design. Proyecto de la materia Diseño Web Adaptable (UNIVO). Usa datos de demostración (no se conecta a ninguna API).
 
-Currently, two official plugins are available:
+## Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Tarjetas de países con bandera, nombre, población, región y capital.
+- Cuatro tarjetas por fila en pantallas amplias; dos en tabletas y una en móviles.
+- Búsqueda por nombre que se actualiza al escribir.
+- Filtro por región combinado con la búsqueda.
+- Mensaje cuando ningún país coincide.
+- Menú de navegación en escritorio y menú desplegable en móvil.
 
-## React Compiler
+## Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React + TypeScript
+- Vite
+- Tailwind CSS v4
+- pnpm
 
-## Expanding the Oxlint configuration
+## Requisitos
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+- Node.js 20 o superior
+- pnpm
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+## Cómo ejecutarlo
+
+```bash
+git clone https://github.com/Wippomonster/explorer-react.git
+cd explorer-react
+pnpm install
+pnpm dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Abre la dirección que muestra la terminal (normalmente `http://localhost:5173`).
+
+Para construir la versión de producción:
+
+```bash
+pnpm build
+```
+
+## Organización de carpetas (Atomic Design)
+
+| Ruta | Contenido |
+|---|---|
+| `src/components/atoms/` | Piezas básicas: `Button`, `Input`, `Select`, `Flag`, `InfoLine` |
+| `src/components/molecules/` | Combinaciones: `CountryCard`, `SearchField`, `RegionFilter`, `NavLinks`, `EmptyMessage` |
+| `src/components/organisms/` | Secciones: `Header`, `FiltersBar`, `CountryGrid`, `Footer` |
+| `src/App.tsx` | Componente padre que guarda el estado compartido |
+| `src/types/` | Interfaces y tipos de TypeScript |
+| `src/data/` | Datos de demostración |
+| `src/utils/` | Funciones auxiliares (`filterCountries`, `formatPopulation`) |
+
+## Estado y comunicación entre componentes
+
+El estado (`search`, `region` e `isMenuOpen`) vive en `App.tsx` con `useState`. Los componentes hijos lo reciben por props y piden cambiarlo llamando a funciones callback (`onSearchChange`, `onRegionChange`, `onToggleMenu`). Con ese estado, `App` calcula la lista de países visibles con `filterCountries`.

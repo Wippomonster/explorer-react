@@ -1,1 +1,24 @@
 @import "tailwindcss";
+
+@theme {
+  --color-primary: #345995;
+  --color-secondary: #348a95;
+  --color-accent: #f79256;
+  --color-bg: #f7fafc;
+  --color-surface: #ffffff;
+  --color-ink: #1f1f1f;
+  --color-ink-muted: #616161;
+  --color-ink-inverse: #ffffff;
+  --color-border: #348a95;
+
+  --text-display: 2.75rem;
+  --text-heading-section: 1.75rem;
+  --text-heading-card: 1.25rem;
+  --text-body-lg: 1.125rem;
+  --text-body: 1rem;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-full: 9999px;
+}
