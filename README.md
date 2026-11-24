@@ -2,7 +2,7 @@
 
 Aplicación adaptable para explorar países, hecha con React y TypeScript siguiendo Atomic Design. Proyecto de la materia Diseño Web Adaptable (UNIVO). Muestra un listado de países con búsqueda y filtro por región, y una página de detalle para cada país.
 
-- **Aplicación publicada:** TU-URL-DE-VERCEL
+- **Aplicación publicada:** https://explorer-react-j5h7zah34-univo2.vercel.app/
 - **Versión anterior (Vanilla TypeScript):** https://github.com/Wippomonster/explore-app
 
 ## Capturas
