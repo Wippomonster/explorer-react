@@ -13,8 +13,10 @@ export function CountryCard({ country, onSelect }: CountryCardProps): JSX.Elemen
   const name: string = country.names.common;
 
   return (
-    <article className="flex flex-col overflow-hidden rounded-sm border-2 border-border bg-surface">
-      <Flag src={country.flag.url_svg} alt={`Bandera de ${name}`} />
+    <article className="flex flex-col overflow-hidden rounded-sm border-2 border-border bg-surface transition duration-200 hover:-translate-y-1 hover:shadow-lg hover:ring-2 hover:ring-secondary focus-within:shadow-lg focus-within:ring-2 focus-within:ring-secondary motion-reduce:transition-none motion-reduce:hover:translate-y-0">
+      <Flag src={country.flag.url_svg}
+      alt={`Bandera de ${name}`}
+      className="border-b-2 border-border"/>
       <div className="flex flex-1 flex-col p-4">
         <h3 className="text-heading-card font-bold break-words">{name}</h3>
         <p className="mt-1 text-body text-ink-muted">
