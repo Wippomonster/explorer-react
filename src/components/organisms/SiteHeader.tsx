@@ -1,6 +1,9 @@
 // navegación de escritorio y menú desplegable en móvil
 import { useState } from "react";
 import type { JSX } from "react";
+import { Link } from "react-router-dom";
+import { useDarkMode } from "../../hooks/useDarkMode";
+import { ThemeToggle } from "../molecules/ThemeToggle";
 
 interface NavItem {
   label: string;
@@ -8,14 +11,18 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { label: "Inicio", href: "#inicio" },
-  { label: "Explorar países", href: "#paises" },
+  { label: "Inicio", href: "/" },
+  { label: "Explorar países", href: "/#paises" },
   { label: "Acerca de", href: "#acerca-de" },
 ];
+
+const NAV_LINK_CLASS: string =
+  "block rounded-sm px-1 py-3 transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:py-2";
 
 export function SiteHeader(): JSX.Element {
   // Este estado solo lo usa este componente, por eso vive aquí
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const { isDark, toggleTheme } = useDarkMode();
 
   function handleToggleMenu(): void {
     setIsMenuOpen((previous: boolean): boolean => !previous);
@@ -29,9 +36,9 @@ export function SiteHeader(): JSX.Element {
     <header className="bg-primary text-ink-inverse">
       <div className="mx-auto max-w-6xl px-4 md:flex md:items-center md:justify-between">
         <div className="flex min-h-16 items-center justify-between">
-          <a href="#inicio" onClick={handleCloseMenu} className="text-body-lg font-bold">
+          <Link to="/" onClick={handleCloseMenu} className="text-body-lg font-bold">
             Where in the world?
-          </a>
+          </Link>
 
           <button
             type="button"
@@ -53,15 +60,20 @@ export function SiteHeader(): JSX.Element {
           <ul className="flex flex-col gap-1 md:flex-row md:items-center md:gap-6">
             {NAV_ITEMS.map((item: NavItem): JSX.Element => (
               <li key={item.href}>
-                <a
-                  href={item.href}
-                  onClick={handleCloseMenu}
-                  className="block rounded-sm px-1 py-3 transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:py-2"
-                >
-                  {item.label}
-                </a>
+                {item.href.startsWith("/") ? (
+                  <Link to={item.href} onClick={handleCloseMenu} className={NAV_LINK_CLASS}>
+                    {item.label}
+                  </Link>
+                ) : (
+                  <a href={item.href} onClick={handleCloseMenu} className={NAV_LINK_CLASS}>
+                    {item.label}
+                  </a>
+                )}
               </li>
             ))}
+            <li>
+              <ThemeToggle isDark={isDark} onToggle={toggleTheme} />
+              </li>
           </ul>
         </nav>
       </div>

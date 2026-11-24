@@ -21,4 +21,16 @@
   --radius-md: 0.75rem;
   --radius-lg: 1rem;
   --radius-full: 9999px;
+
+}
+
+/* Modo oscuro */
+:root.dark {
+  color-scheme: dark;
+  --color-primary: #4a74c0;
+  --color-bg: #0f172a;
+  --color-surface: #1e293b;
+  --color-ink: #f1f5f9;
+  --color-ink-muted: #94a3b8;
+  --color-border: #2dd4bf;
 }
